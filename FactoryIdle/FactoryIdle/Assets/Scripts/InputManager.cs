@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -11,6 +13,16 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private LayerMask placementLayermask;
+
+    public static Action onClicked;
+    
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            onClicked?.Invoke();
+        }
+    }
 
     public Vector3 GetSelectedMapPosition()
     {

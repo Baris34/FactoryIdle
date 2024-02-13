@@ -72,6 +72,8 @@ public class PlacementSystem : MonoBehaviour
             FactoryManager.Instance.totalFactory += 1;
             PlayerPrefs.SetInt("totalFactory",FactoryManager.Instance.totalFactory);
             PlayerPrefs.SetInt("factoryPrice",PlayerManager.Instance.factoryPrice);
+            UIManager.Instance.setMaliyetText(PlayerManager.Instance.factoryPrice);
+
         }
         
     }

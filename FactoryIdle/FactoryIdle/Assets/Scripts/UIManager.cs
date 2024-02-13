@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text GelenMadenText;
     [SerializeField] private TMP_Text kazancText;
     [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text maliyetText;
+
     private bool panelAcikMi=false;
     private static UIManager instance;
 
@@ -34,12 +36,15 @@ public class UIManager : MonoBehaviour
     {
         kazancText.text = MadenManager.Instance.arttirPrice.ToString();
         GelenMadenText.text = MadenManager.Instance.madenHitPrice.ToString();
+        maliyetText.text = PlayerManager.Instance.factoryPrice.ToString();
     }
 
     private void Update()
     { 
         
         goldText.text = Convert.ToInt32(PlayerManager.Instance.totalGold).ToString();
+        
+
     }
     public void cameraControl()
     {
@@ -65,11 +70,6 @@ public class UIManager : MonoBehaviour
         CameraManager.Instance.fabrikaCam();
     }
 
-    public void setGoldText(int value)
-    {
-        goldText.text = value.ToString();
-    }
-
     public void KazancBtn()
     {
         MadenManager.Instance.KazancArttir();
@@ -82,14 +82,30 @@ public class UIManager : MonoBehaviour
         {
             panelAcikMi = true;
             GameManager.Instance.changeState(GameManager.State.MineShop);
+            
         }
         else
         {
             panelAcikMi = false;
-            GameManager.Instance.changeState(GameManager.State.Mine);
+            if (CameraManager.Instance.cam.position==new Vector3(-5,25,5))
+            {
+                GameManager.Instance.changeState(GameManager.State.Mine);
+                
+            }
+            else
+            {
+                GameManager.Instance.changeState(GameManager.State.Factory);
+
+
+            }
         }
     }
 
+   public void setMaliyetText(int value)
+    {
+        maliyetText.text = value.ToString();
+
+    }
     public void GelenMadenBtn()
     {
         MadenManager.Instance.MadenTikArttir();
@@ -99,7 +115,17 @@ public class UIManager : MonoBehaviour
     {
         panel.SetActive(false);
         panelAcikMi = false;
-        GameManager.Instance.changeState(GameManager.State.Mine);
+        if (CameraManager.Instance.cam.position==new Vector3(-5,25,5))
+        {
+            GameManager.Instance.changeState(GameManager.State.Mine);
+
+        }
+        else
+        {
+            GameManager.Instance.changeState(GameManager.State.Factory);
+
+
+        }
 
     }
 }

@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
     private int ilkBasladi=0;
     private void Start()
     {
-        
         ilkBasladi = PlayerPrefs.GetInt("ilkBasladi");
         if (ilkBasladi==0)
         {

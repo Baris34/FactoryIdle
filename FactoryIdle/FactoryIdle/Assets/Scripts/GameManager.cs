@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Factory:
                 placement.GetComponent<PlacementSystem>().enabled = true;
-                
+                UIManager.Instance.panel.SetActive(false);
+
 
                 break;
             case State.MineShop:
